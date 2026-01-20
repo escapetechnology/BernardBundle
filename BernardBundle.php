@@ -18,7 +18,7 @@ class BernardBundle extends Bundle
         ;
     }
 
-    public function registerCommands(Application $application)
+    public function registerCommands(Application $application): void
     {
         parent::registerCommands($application);
     }
