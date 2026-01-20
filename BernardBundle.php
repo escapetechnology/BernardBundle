@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class BernardBundle extends Bundle
 {
-    public function build(ContainerBuilder $builder)
+    public function build(ContainerBuilder $builder): void
     {
         $builder
             ->addCompilerPass(new ReceiverPass())
