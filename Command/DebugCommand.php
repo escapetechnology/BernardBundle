@@ -41,7 +41,7 @@ class DebugCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (null === $this->router) {
             $this->router = $this->getContainer()->get('bernard.router');
