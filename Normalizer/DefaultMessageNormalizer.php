@@ -2,6 +2,7 @@
 
 namespace Bernard\BernardBundle\Normalizer;
 
+use ArrayObject;
 use Assert\Assertion;
 use Bernard\Message\DefaultMessage;
 use Bernard\Normalizer\PlainMessageNormalizer;
@@ -11,17 +12,17 @@ class DefaultMessageNormalizer extends PlainMessageNormalizer
     /**
      * {@inheritdoc}
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $data, ?string $format = null, array $context = []): ArrayObject|array|string|int|float|bool|null
     {
         @trigger_error('The '.__CLASS__.' class is deprecated and will removed in version 3.0. Use '.PlainMessageNormalizer::class.' instead.', E_USER_DEPRECATED);
 
-        parent::normalize($object, $format, $context);
+        parent::normalize($data, $format, $context);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         @trigger_error('The '.__CLASS__.' class is deprecated and will removed in version 3.0. Use '.PlainMessageNormalizer::class.' instead.', E_USER_DEPRECATED);
 
@@ -35,7 +36,7 @@ class DefaultMessageNormalizer extends PlainMessageNormalizer
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === DefaultMessage::class;
     }
@@ -43,8 +44,18 @@ class DefaultMessageNormalizer extends PlainMessageNormalizer
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof DefaultMessage;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            DefaultMessage::class => true,
+        ];
     }
 }
